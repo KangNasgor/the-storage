@@ -5,7 +5,8 @@ export default async function Items(){
     interface Items{
         id : number,
         name : string,
-        amount : number
+        amount : number,
+        category : string,
     }
 
     const items : Items[] = await getItems();
@@ -17,6 +18,7 @@ export default async function Items(){
                     <td className='px-5 py-3'>ID</td>
                     <td className='px-5 py-3'>Name</td>
                     <td className='px-5 py-3'>Amount</td>
+                    <td className='px-5 py-3'>Category</td>
                     <td className='px-5 py-3'>Options</td>
                 </tr>
             </thead>
@@ -26,6 +28,7 @@ export default async function Items(){
                         <td className='px-5 py-3'>{item.id}</td>
                         <td className='px-5 py-3'>{item.name}</td>
                         <td className='px-5 py-3'>{item.amount}</td>
+                        <td className='px-5 py-3'>{item.category}</td>
                         <td className='px-5 py-3 flex flex-row gap-5'>
                             <Button text='Edit' background='#fffff' color='black'/>
                             <Button text='Delete' background='#fffff' color='black'/>

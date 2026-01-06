@@ -8,6 +8,6 @@ export async function getItems() {
     }
 
     const data = await response.json();
-
+    
     return data.message;
 }
