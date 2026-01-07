@@ -2,6 +2,7 @@ import { prisma } from '../../../../lib/prisma'
 import { NextRequest, NextResponse } from 'next/server';
 
 interface Items {
+    id : number,
     name : string,
     amount : number,
     category : string,
@@ -73,5 +74,60 @@ export async function POST(req : NextRequest){
 } 
 
 export async function UPDATE(req: NextRequest){
-    const {name, amount, category} : Items = await req.json();
+    const {id, name, amount, category} : Items = await req.json();
+
+    if(!id){
+        return NextResponse.json({ message : 'ID is required.'}, {
+            status : 400
+        })
+    }
+
+    const data : any = {}
+
+    if(name !== undefined) data.name = name;
+    if(amount !== undefined) data.amount = amount;
+    if(category !== undefined) data.category = category;
+
+    try{
+        const item = await prisma.items.update({
+            where : {
+                id
+            },
+            data
+        })
+
+        return NextResponse.json({ message : 'Record updated successfully.'}, {
+            status : 200
+        })
+    }
+    catch(error){   
+        return NextResponse.json({ message : `Something unexpected happenned. Error : ${error}`}, {
+            status : 500
+        })
+    }
+}
+
+export async function DELETE(req: NextRequest){
+    const { id } : Items = await req.json();
+    if(!id){
+        return NextResponse.json({ message : 'Invalid ID'}, {
+            status : 400
+        })
+    }
+    try{
+        const item = await prisma.items.delete({
+            where : {
+                id,
+            }
+        })
+
+        return NextResponse.json({ message : 'Record deleted successfully.'}, {
+            status : 200
+        })
+    }
+    catch(error){
+        return NextResponse.json({message : `Something unexpected happened. Error : ${error}`}, {
+            status: 500
+        })
+    }
 }
