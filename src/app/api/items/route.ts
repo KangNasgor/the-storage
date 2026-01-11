@@ -5,7 +5,7 @@ interface Items {
     id : number,
     name : string,
     amount : number,
-    category : string,
+    category : number, // Category is a number because it's a foreign key
 }
 
 export async function GET(req : NextRequest){
@@ -14,7 +14,20 @@ export async function GET(req : NextRequest){
 
     if(!name){
         try{
-            const item = await prisma.items.findMany();
+            const item = await prisma.items.findMany({
+                select : {
+                    id: true,
+                    name: true,
+                    amount: true,
+                    created_at: true,
+                    updated_at: true,
+                    categorys : {
+                        select : {
+                            name : true
+                        }
+                    }
+                }
+            });
     
             return NextResponse.json({ message : item }, {
                 status : 200

@@ -1,12 +1,14 @@
 import { getItems } from '../../../lib/getItems';
 import Button from './Button';
+import CreateRecord from './CreateRecord';
+
 
 export default async function Items(){
     interface Items{
         id : number,
         name : string,
         amount : number,
-        category : string,
+        categorys : any,
         created_at : string,
         updated_at : Date,
     }
@@ -16,7 +18,7 @@ export default async function Items(){
     return(
         <div className='grid grid-cols-1 gap-5'>
             <div className='flex flex-row gap-5'>
-                <Button text='Create' background='bg-sky-600' color='black'/>
+                <CreateRecord />
                 <Button text='History' background='bg-sky-600' color='black'/>
             </div>
             <table className='table table-auto text-center'>
@@ -37,7 +39,7 @@ export default async function Items(){
                             <td className='px-5 py-3'>{item.id}</td>
                             <td className='px-5 py-3'>{item.name}</td>
                             <td className='px-5 py-3'>{item.amount}</td>
-                            <td className='px-5 py-3'>{item.category}</td>
+                            <td className='px-5 py-3'>{item.categorys.name}</td>
                             <td className='px-5 py-3'>
                                 {new Intl.DateTimeFormat("id-ID", {
                                     dateStyle: 'medium',
