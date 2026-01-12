@@ -19,7 +19,7 @@ export default async function Items(){
         <div className='grid grid-cols-1 gap-5'>
             <div className='flex flex-row gap-5'>
                 <CreateRecord />
-                <Button text='History' background='bg-sky-600' color='black'/>
+                <Button text='History' background='bg-sky-600' color='white'/>
             </div>
             <table className='table table-auto text-center'>
                 <thead className='bg-sky-900'>
@@ -54,7 +54,7 @@ export default async function Items(){
                             </td>
                             <td className='px-5 py-3 flex flex-row gap-5'>
                                 <Button text='Edit' background='bg-sky-600' color='white'/>
-                                <Button text='Delete' background='bg-sky-600' color='black'/>
+                                <Button text='Delete' background='bg-sky-600' color='white'/>
                             </td>
                         </tr>
                     ))}
