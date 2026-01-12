@@ -3,13 +3,14 @@ type Button = {
     background : string,
     color : string,
     onClick? : React.MouseEventHandler<HTMLButtonElement>
+    type? : "submit" | "reset" | "button" | undefined,
 }
 
-export default function Button({ text, background, color, onClick } : Button) {
+export default function Button({ text, background, color, onClick, type } : Button) {
     const backgroundColor : string = background.trim();
     const textColor : string = color.trim();
     return(
-        <button onClick={onClick} className={`${backgroundColor.startsWith('bg-') ? backgroundColor : ''} rounded-3xl px-5 py-3 cursor-pointer active:scale-90 transition-transform duration-100`} style={{
+        <button type={type} onClick={onClick} className={`${backgroundColor.startsWith('bg-') ? backgroundColor : ''} rounded-3xl px-5 py-3 cursor-pointer active:scale-90 transition-transform duration-100`} style={{
             backgroundColor : backgroundColor.startsWith('bg-') ? undefined : backgroundColor
         }}>
             <h1 className={`${textColor.startsWith('text') ? textColor : ''}`} style={{
