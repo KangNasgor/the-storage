@@ -3,8 +3,11 @@
 import { useState, useReducer, useEffect } from "react";
 import Button from "./Button";
 import { getCategories } from '../../../lib/getCategories';
+import { useRouter } from "next/navigation";
 
 export default function CreateRecord(){
+    const router = useRouter();
+
     interface Categories{
         id : number,
         name : string,
@@ -26,13 +29,13 @@ export default function CreateRecord(){
     type State = {
         name : string,
         amount : number,
-        category : string,
+        category : number,
     }
 
     type Action = 
     | {type : 'setName'; payload : string}
     | {type : 'setAmount'; payload : number}
-    | {type : 'setCategory'; payload : string}
+    | {type : 'setCategory'; payload : number}
 
     function reducer(state : State, action : Action){
         switch(action.type){
@@ -50,15 +53,40 @@ export default function CreateRecord(){
     const[state, dispatch] = useReducer(reducer, {
         name: '',
         amount: 0,
-        category : ''
+        category : 1
     })
     
-    const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        
+        try{
+            const response : Response = await fetch('http://localhost:3000/api/items', {
+                method : 'POST',
+                headers : {
+                    "Content-Type" : "application/json"
+                },
+                body : JSON.stringify(state),
+            })
 
+            const data = await response.json();
+
+            if(!response.ok){
+                throw new Error(await data.message)
+            }
+
+            router.refresh();
+            return data.status;
+        }
+        catch(error){
+            if(error instanceof Error) return error.message;
+
+            return `Something unexpected happened. Error : ${error}`
+        }
+        finally{
+            setOpenModal(false)
+        }
     }
+
     return(
         <>
         <Button text='Create' background='bg-sky-600' color='white' onClick={() => setOpenModal(prev => !prev)}/>
@@ -76,7 +104,7 @@ export default function CreateRecord(){
                     <div className="flex flex-col gap-1 w-6/12">
                         <label>Category</label>
                         {/* <input className="w-full bg-white rounded-md text-black px-3 py-1" onChange={(e) => dispatch({ type : 'setCategory', payload : e.target.value})}></input> */}
-                        <select className="w-full bg-white rounded-md text-black px-3 py-1">
+                        <select className="w-full bg-white rounded-md text-black px-3 py-1" onChange={(e) => dispatch({type : 'setCategory', payload : Number(e.target.value)})}>
                             {
                                 categories.map(category => (
                                     <option key={category.id} value={category.id}>{category.name}</option>

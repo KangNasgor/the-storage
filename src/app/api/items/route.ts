@@ -74,7 +74,7 @@ export async function POST(req : NextRequest){
             }
         })
 
-        return NextResponse.json({ message : 'Table created successfully.'}, {
+        return NextResponse.json({ message : 'Table created successfully.', data : item}, {
             status : 201
         })
     }
