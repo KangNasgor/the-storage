@@ -7,24 +7,31 @@ import { useRouter } from "next/navigation";
 
 export default function CreateRecord(){
     const router = useRouter();
-
+    const [errorMessage, setErrorMessage] = useState<string | null>('');
+    const [loading, setLoading] = useState<boolean>(false);
     interface Categories{
         id : number,
         name : string,
     }
+
     const [categories, setCategories] = useState<Categories[]>([])
 
     useEffect(() => {
-        getCategories().then(setCategories);
+        const loadCategories = async () => {
+            try{
+                const data = await getCategories();
+                setCategories(data);
+            }
+            catch(error){
+                setErrorMessage(`${error}`)
+                console.error(errorMessage)
+            }
+        }
+
+        loadCategories();
     }, []);
 
     const [openModal, setOpenModal] = useState(false);
-
-    const [record, setRecord] = useState({
-        name : '',
-        amount : 0,
-        category : '',
-    });
 
     type State = {
         name : string,
@@ -46,7 +53,8 @@ export default function CreateRecord(){
                 return {...state, amount : action.payload};
             case 'setCategory' :
                 return {...state, category : action.payload}
-
+            default :
+                return state;
         }
     }
 
@@ -59,8 +67,11 @@ export default function CreateRecord(){
     const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        if(!state.name.trim()) return alert('Name is required');
+        if(state.amount <= 0) return alert('Invalid amount.')
+
         try{
-            const response : Response = await fetch('http://localhost:3000/api/items', {
+            const response : Response = await fetch('/api/items', {
                 method : 'POST',
                 headers : {
                     "Content-Type" : "application/json"
@@ -71,19 +82,16 @@ export default function CreateRecord(){
             const data = await response.json();
 
             if(!response.ok){
-                throw new Error(await data.message)
-            }
-
+                throw new Error(data.message)
+            }            
+            setOpenModal(false);
             router.refresh();
             return data.status;
         }
         catch(error){
-            if(error instanceof Error) return error.message;
-
-            return `Something unexpected happened. Error : ${error}`
-        }
-        finally{
-            setOpenModal(false)
+            if(error instanceof Error) setErrorMessage(error.message);
+            const message = setErrorMessage(`Something unexpected happened. Error : ${error}`);
+            alert(errorMessage)
         }
     }
 
@@ -113,7 +121,7 @@ export default function CreateRecord(){
                         </select>
                     </div>
                     <div className="flex gap-5 mt-5">
-                        <Button type="submit" text="Submit" background="#0aa314" color="white"/>
+                        <Button disabled={loading} type="submit" text="Submit" background="#0aa314" color="white"/>
                         <Button type="reset" text="Reset" background="#cc1215" color="white"/>
                         <Button onClick={() => setOpenModal(false)} text="Close" background="white" color="black"/>
                     </div>
