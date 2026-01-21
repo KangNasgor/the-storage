@@ -1,6 +1,7 @@
 import { getItems } from '../../../lib/getItems';
 import Button from './Button';
 import CreateRecord from './CreateRecord';
+import UpdateRecord from './UpdateRecord';
 
 
 export default async function Items(){
@@ -53,7 +54,7 @@ export default async function Items(){
                                 }).format(new Date(item.updated_at))}
                             </td>
                             <td className='px-5 py-3 flex flex-row gap-5'>
-                                <Button text='Edit' background='bg-sky-600' color='white'/>
+                                <UpdateRecord id={item.id}/>
                                 <Button text='Delete' background='bg-sky-600' color='white'/>
                             </td>
                         </tr>

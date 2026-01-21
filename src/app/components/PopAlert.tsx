@@ -9,10 +9,10 @@ interface Props {
     color : string,
     bg : string,
     addText? : boolean,
-    type : 'info' | 'warning' | 'success'
+    type : 'info' | 'warning' | 'success',
 }
 
-export default function Alert({text, color, bg, addText, type} : Props){
+export default function PopAlert({text, color, bg, addText, type} : Props){
     switch(type){
         case 'success' :
             return(

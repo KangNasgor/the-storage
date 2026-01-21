@@ -85,8 +85,10 @@ export async function POST(req : NextRequest){
     }
 } 
 
-export async function UPDATE(req: NextRequest){
+export async function PUT(req: NextRequest){
     const {id, name, amount, category} : Items = await req.json();
+
+    console.log(req.json())
 
     if(!id){
         return NextResponse.json({ message : 'ID is required.'}, {
