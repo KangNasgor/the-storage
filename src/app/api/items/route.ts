@@ -124,6 +124,7 @@ export async function PUT(req: NextRequest){
 export async function DELETE(req: NextRequest){
     const { id } : Items = await req.json();
     if(!id){
+        console.log(req)
         return NextResponse.json({ message : 'Invalid ID'}, {
             status : 400
         })

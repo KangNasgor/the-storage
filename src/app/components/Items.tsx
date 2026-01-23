@@ -1,6 +1,7 @@
 import { getItems } from '../../../lib/getItems';
 import Button from './Button';
 import CreateRecord from './CreateRecord';
+import DeleteRecord from './DeleteRecord';
 import UpdateRecord from './UpdateRecord';
 
 
@@ -55,7 +56,7 @@ export default async function Items(){
                             </td>
                             <td className='px-5 py-3 flex flex-row gap-5'>
                                 <UpdateRecord id={item.id}/>
-                                <Button text='Delete' background='bg-sky-600' color='white'/>
+                                <DeleteRecord id={item.id} name={item.name}/>
                             </td>
                         </tr>
                     ))}
