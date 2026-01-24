@@ -1,13 +1,13 @@
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { getItems } from '../../../lib/getItems';
 import Button from './Button';
 import CreateRecord from './CreateRecord';
 import DeleteRecord from './DeleteRecord';
+import SearchBar from './SearchBar';
 import UpdateRecord from './UpdateRecord';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-export default async function Items(){
+
+export default async function Items({ searchParams } : { searchParams? : { q? : string } }){
     interface Items{
         id : number,
         name : string,
@@ -17,7 +17,9 @@ export default async function Items(){
         updated_at : Date,
     }
 
-    const items : Items[] = await getItems();
+    const query = searchParams?.q ?? '';
+
+    const items : Items[] = await getItems(query);
 
     return(
         <div className='grid grid-cols-1 gap-5'>
@@ -33,11 +35,7 @@ export default async function Items(){
                             </div>
                         </td>
                         <td colSpan={3} className='py-2 px-3'>
-                            <div className='flex flex-row items-center gap-3 w-full justify-end'>
-                                <FontAwesomeIcon icon={faMagnifyingGlass} className='w-5 h-5'/>
-                                <input className='rounded-md px-3 py-2 text-black bg-white' placeholder='mouse'/>
-                                <Button text='Search' background='bg-sky-600' color='white'/>
-                            </div>
+                            <SearchBar />
                         </td>
                     </tr>
                     <tr>

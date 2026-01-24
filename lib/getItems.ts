@@ -1,5 +1,5 @@
-export async function getItems() {
-    const response = await fetch('http://localhost:3000/api/items', {
+export async function getItems(query? : string) {
+    const response = await fetch(`/api/items?search=${encodeURIComponent(query ?? '')}`, {
         cache: 'no-store'
     })
 
@@ -8,6 +8,6 @@ export async function getItems() {
     }
 
     const data = await response.json();
-    
+        
     return data.message;
 }

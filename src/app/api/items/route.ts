@@ -10,9 +10,9 @@ interface Items {
 
 export async function GET(req : NextRequest){
     const params = req.nextUrl.searchParams;
-    const name = params.get("name")
-
-    if(!name){
+    const query = params.get("query")
+    console.log(query);
+    if(!query){
         try{
             const item = await prisma.items.findMany({
                 select : {
@@ -43,7 +43,7 @@ export async function GET(req : NextRequest){
     try{
         const items = await prisma.items.findMany({
             where : {
-                name : name
+                name : query
             }
         });
         

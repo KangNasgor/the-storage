@@ -1,0 +1,101 @@
+[33mcommit 9381518b6dc08408d3032f8918ae75dd09d7a178[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Fri Jan 23 22:34:20 2026 +0700
+
+    jiman
+
+[33mcommit e4aeb6fd8ba3fc5c808a2e2a5f473fe8cb15b536[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Fri Jan 23 16:49:36 2026 +0700
+
+    dramamamama
+
+[33mcommit 3d97b6a282b346cdbdfbb9b4f32522f3eb4da806[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Wed Jan 21 17:35:22 2026 +0700
+
+    work njir hahay
+
+[33mcommit 3f8dda470cdb678fe733721ef922ac049fae0aa9[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Fri Jan 16 18:39:04 2026 +0700
+
+    creating alert button
+
+[33mcommit 11ef6b32c64ace66e58853cfc1ee1bbe043e78c4[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Wed Jan 14 22:57:27 2026 +0700
+
+    i wanna hold u just for a while
+
+[33mcommit bf6a32698ce54973b1b473d81c46c5ebf345a52e[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Wed Jan 14 17:51:33 2026 +0700
+
+    wauidawduilgawdigu
+
+[33mcommit 30e741f234a95c344255abe86d0bcd8854c9c79c[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Wed Jan 14 17:37:10 2026 +0700
+
+    sususususupernova
+
+[33mcommit 95c072b20bf66b6cbbb2525120b7ab01c53c0d87[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Mon Jan 12 22:10:56 2026 +0700
+
+    sususususupernova
+
+[33mcommit 0f730d733b1e822896c805fb5813c12e32af7afc[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Mon Jan 12 18:00:01 2026 +0700
+
+    yes
+
+[33mcommit 267bce0887b1f93d9a406291b08355bdee413223[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Sun Jan 11 09:23:20 2026 +0700
+
+    bleh
+
+[33mcommit 4f57e23108d6f74043b7183a83f5bda1e3920c2b[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Wed Jan 7 22:05:41 2026 +0700
+
+    created update and delete api method
+
+[33mcommit 1c2ef7e57da87f48760a9207580f4e0fde004e58[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Wed Jan 7 21:34:17 2026 +0700
+
+    changing table's color theme
+
+[33mcommit 9cf42a102849ce0219e93205b2b6e3d942e41332[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Tue Jan 6 14:47:19 2026 +0700
+
+    added category for items
+
+[33mcommit d0f1485263b54735c2b24b95d81b73394c54805c[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Tue Jan 6 14:28:55 2026 +0700
+
+    making button for data options in table
+
+[33mcommit eb42d6d6278d3cb4afab867e06dabe4b211e590d[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Mon Jan 5 19:38:12 2026 +0700
+
+    showing the items data from database to client
+
+[33mcommit 5aa8001ee48a8b29f26757cc1700ef3ac7f16ad7[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Mon Jan 5 18:37:57 2026 +0700
+
+    first commit, created api (might create new apis later), established a prisma connection to the database
+
+[33mcommit a3617360a3ed80e2f00cfe39d3ba9bc83961c5a0[m
+Author: KangNasgor <74401836+KangNasgor@users.noreply.github.com>
+Date:   Fri Jan 2 16:27:05 2026 +0700
+
+    Initial commit from Create Next App
