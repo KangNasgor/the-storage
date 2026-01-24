@@ -2,35 +2,46 @@ import { getItems } from '../../../lib/getItems';
 import Button from './Button';
 import CreateRecord from './CreateRecord';
 import DeleteRecord from './DeleteRecord';
-import SearchBar from './SearchBar';
 import UpdateRecord from './UpdateRecord';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 
 
-export default async function Items({ searchParams } : { searchParams? : { q? : string } }){
+export default async function Items(){
     interface Items{
         id : number,
-        name : string,
-        amount : number,
-        categorys : any,
-        created_at : string,
-        updated_at : Date,
+        name : string | null,
+        amount : number | null,
+        categorys : {
+            id : number,
+            name : string | null,
+        },
+        created_at : Date | null,
+        updated_at : Date | null,
     }
-
-    const query = searchParams?.q ?? '';
-
-    const items : Items[] = await getItems(query);
+    const items = await getItems();
 
     return(
         <div className='grid grid-cols-1 gap-5'>
-            <div className='flex flex-row gap-5'>
-                <CreateRecord />
-                <Button text='History' background='bg-sky-600' color='white'/>
-            </div>
-            <table className='table table-auto text-center'>
-                <thead className='bg-sky-900'>
-                    <tr>
-                        <td className='px-5 py-3'>ID</td>
+            <table className='table table-auto text-center rounded-md overflow-hidden'>
+                <thead>
+                    <tr className='bg-sky-800'>
+                        <td colSpan={6} className='py-2 px-3'>
+                            <div className='flex flex-row justify-between'>
+                                <div className='flex flex-row gap-5'>
+                                    <CreateRecord />
+                                    <Button text='History' background='bg-sky-600' color='white'/>
+                                </div>
+                                <div className='flex flex-row items-center gap-3 w-full justify-end'>
+                                    <FontAwesomeIcon icon={faMagnifyingGlass} className='w-5 h-5'/>
+                                    <input className='rounded-md px-3 py-2 text-black bg-white' placeholder='mouse'/>
+                                    <Button text='Search' background='bg-sky-600' color='white'/>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr className='bg-sky-900'>
                         <td className='px-5 py-3'>Name</td>
                         <td className='px-5 py-3'>Amount</td>
                         <td className='px-5 py-3'>Category</td>
@@ -42,21 +53,22 @@ export default async function Items({ searchParams } : { searchParams? : { q? : 
                 <tbody>
                     {items.map(item => (
                         <tr key={item.id} className='bg-sky-950'>
-                            <td className='px-5 py-3'>{item.id}</td>
                             <td className='px-5 py-3'>{item.name}</td>
                             <td className='px-5 py-3'>{item.amount}</td>
-                            <td className='px-5 py-3'>{item.categorys.name}</td>
+                            <td className='px-5 py-3'>{item.categorys?.name}</td>
                             <td className='px-5 py-3'>
-                                {new Intl.DateTimeFormat("id-ID", {
+                                {item.created_at ? new Intl.DateTimeFormat("id-ID", {
                                     dateStyle: 'medium',
                                     timeStyle: "long",
-                                }).format(new Date(item.created_at))}
+                                }).format(new Date(item.created_at))
+                                : '-'}
                             </td>
                             <td className='px-5 py-3'>
-                                {new Intl.DateTimeFormat("id-ID", {
+                                {item.updated_at ? new Intl.DateTimeFormat("id-ID", {
                                     dateStyle: 'medium',
                                     timeStyle: 'long',
-                                }).format(new Date(item.updated_at))}
+                                }).format(new Date(item.updated_at))
+                                : '='}
                             </td>
                             <td className='px-5 py-3 flex flex-row gap-5'>
                                 <UpdateRecord id={item.id}/>

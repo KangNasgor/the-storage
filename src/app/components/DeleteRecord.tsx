@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from "./Button";
 import { useRouter } from "next/navigation";
 
-export default function DeleteRecord({ id, name } : { id : number, name : string }){
+export default function DeleteRecord({ id, name } : { id : number, name : string | null }){
     const [openModal, setOpenModal] = useState<boolean>(false);
     const router = useRouter();
     const deleteRecord = async () => {

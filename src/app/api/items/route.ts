@@ -26,7 +26,7 @@ export async function GET(req : NextRequest){
                             name : true
                         }
                     }
-                }
+                },
             });
     
             return NextResponse.json({ message : item }, {
