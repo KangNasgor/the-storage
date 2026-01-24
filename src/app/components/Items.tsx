@@ -24,21 +24,13 @@ export default async function Items({ searchParams } : { searchParams? : { q? : 
     return(
         <div className='grid grid-cols-1 gap-5'>
             <div className='flex flex-row gap-5'>
+                <CreateRecord />
+                <Button text='History' background='bg-sky-600' color='white'/>
             </div>
-            <table className='table table-auto rounded-md overflow-hidden text-center'>
+            <table className='table table-auto text-center'>
                 <thead className='bg-sky-900'>
-                    <tr className='bg-sky-700 '>
-                        <td colSpan={3}>
-                            <div className='flex flex-row gap-3 justify-start w-full px-3'>
-                                <CreateRecord />
-                                <Button text='History' background='bg-sky-600' color='white'/>
-                            </div>
-                        </td>
-                        <td colSpan={3} className='py-2 px-3'>
-                            <SearchBar />
-                        </td>
-                    </tr>
                     <tr>
+                        <td className='px-5 py-3'>ID</td>
                         <td className='px-5 py-3'>Name</td>
                         <td className='px-5 py-3'>Amount</td>
                         <td className='px-5 py-3'>Category</td>
@@ -50,6 +42,7 @@ export default async function Items({ searchParams } : { searchParams? : { q? : 
                 <tbody>
                     {items.map(item => (
                         <tr key={item.id} className='bg-sky-950'>
+                            <td className='px-5 py-3'>{item.id}</td>
                             <td className='px-5 py-3'>{item.name}</td>
                             <td className='px-5 py-3'>{item.amount}</td>
                             <td className='px-5 py-3'>{item.categorys.name}</td>
