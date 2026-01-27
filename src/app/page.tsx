@@ -6,10 +6,11 @@ import UpdateRecord from '@/app/components/UpdateRecord';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import SearchBar from '@/app/components/SearchBar';
+import CategoryFilter from './components/CategoryFilter';
 
 
 
-export default async function Items({ searchParams } : { searchParams? : Promise<{ q? : string}>}){
+export default async function Items({ searchParams } : { searchParams? : Promise<{ q? : string}>}){ // Next JS automatically passes the query parameter from the url to this asynchronous function
   interface Items{
       id : number,
       name : string | null,
@@ -22,9 +23,9 @@ export default async function Items({ searchParams } : { searchParams? : Promise
       updated_at : Date | null,
   }
 
-  const params = await searchParams;
+  const params = await searchParams; // waiting for the parameter to be passed into this variable so we can access the actual query
   const query = params?.q ?? '';
-  const items : Items[] = await getItems(query);
+  const items : Items[] = await getItems(query); // Passing query variable to this function
 
   return(
       <div className='min-h-[100vh] flex justify-center items-center'>
@@ -34,11 +35,12 @@ export default async function Items({ searchParams } : { searchParams? : Promise
                     <tr className='bg-sky-800'>
                         <td colSpan={6} className='py-2 px-3'>
                             <div className='flex flex-row justify-between'>
-                                <div className='flex flex-row gap-5'>
+                                <div className='flex flex-row gap-5 w-4/12'>
                                     <CreateRecord />
                                     <Button text='History' background='bg-sky-600' color='white'/>
                                 </div>
-                                <div className='flex flex-row items-center gap-3 w-full justify-end'>
+                                <CategoryFilter />
+                                <div className='flex flex-row items-center gap-3 justify-end w-4/12'>
                                     <SearchBar defaultValue={query}/>
                                 </div>
                             </div>

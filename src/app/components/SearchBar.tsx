@@ -8,20 +8,24 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function SearchBar({ defaultValue } : { defaultValue : string }){
     const router = useRouter();
-    const params = useSearchParams();
-    const query = params.get('q');
+    const searchParams = useSearchParams();
+    const params = new URLSearchParams(searchParams.toString());
+
     const [searchValue, setSearchValue] = useState(defaultValue);
+
     useEffect(() => {
         setSearchValue(defaultValue)
-    }, [defaultValue])
-    const onInputChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+    }, [defaultValue]);
+    
+    const onInputChange = (e : React.ChangeEvent<HTMLInputElement>) => { // This function watch over the search input, if a value is detected it will push/write that value on the url
         const value = e.target.value;
         setSearchValue(value);
+        params.set('q', value)
         if(value.trim() === ''){
             router.push('/')
         }
         else{
-            router.push(`/?q=${encodeURIComponent(value)}`)
+            router.push(`/?${params.toString()}`)
         }
     }
 
