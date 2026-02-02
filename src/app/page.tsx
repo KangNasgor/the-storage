@@ -10,7 +10,7 @@ import CategoryFilter from './components/CategoryFilter';
 
 
 
-export default async function Items({ searchParams } : { searchParams? : Promise<{ q? : string}>}){ // Next JS automatically passes the query parameter from the url to this asynchronous function
+export default async function Items({ searchParams } : { searchParams? : Promise<{ q? : string, c? : string}>}){ // Next JS automatically passes the query parameter from the url to this asynchronous function
   interface Items{
       id : number,
       name : string | null,
@@ -25,7 +25,8 @@ export default async function Items({ searchParams } : { searchParams? : Promise
 
   const params = await searchParams; // waiting for the parameter to be passed into this variable so we can access the actual query
   const query = params?.q ?? '';
-  const items : Items[] = await getItems(query); // Passing query variable to this function
+  const filter = params?.c  ?? ''
+  const items : Items[] = await getItems(query, filter); // Passing query variable to this function
 
   return(
       <div className='min-h-[100vh] flex justify-center items-center'>

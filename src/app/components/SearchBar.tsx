@@ -22,7 +22,8 @@ export default function SearchBar({ defaultValue } : { defaultValue : string }){
         setSearchValue(value);
         params.set('q', value)
         if(value.trim() === ''){
-            router.push('/')
+            params.delete('q')
+            router.push(`/?${params.toString()}`)
         }
         else{
             router.push(`/?${params.toString()}`)
@@ -30,7 +31,8 @@ export default function SearchBar({ defaultValue } : { defaultValue : string }){
     }
 
     const reset = () => {
-        router.push('/')
+        params.delete('q')
+        router.push(`/?${params.toString()}`)
     }
 
     return(
